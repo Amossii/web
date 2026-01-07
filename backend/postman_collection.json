@@ -1,0 +1,833 @@
+{
+    "info": {
+        "_postman_id": "flask-api-collection-2024",
+        "name": "Flask API Collection - 完整版",
+        "description": "Flask 应用的完整 API 接口集合，包含数据文件、机器学习模型和客户端管理功能",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "健康检查",
+            "item": [
+                {
+                    "name": "健康检查",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/health",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "health"
+                            ]
+                        },
+                        "description": "检查服务运行状态"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "数据文件管理",
+            "item": [
+                {
+                    "name": "上传CSV文件",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": [],
+                                    "description": "CSV文件"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "测试数据集",
+                                    "type": "text",
+                                    "description": "文件描述（可选）"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                ""
+                            ]
+                        },
+                        "description": "上传CSV文件到系统"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取所有数据文件列表",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                ""
+                            ]
+                        },
+                        "description": "获取所有已上传的数据文件列表"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取指定数据文件信息",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                "1"
+                            ]
+                        },
+                        "description": "获取指定ID的数据文件详细信息"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "预览CSV文件内容",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/1/preview?rows=10",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                "1",
+                                "preview"
+                            ],
+                            "query": [
+                                {
+                                    "key": "rows",
+                                    "value": "10",
+                                    "description": "返回的行数（默认10，最多100）"
+                                }
+                            ]
+                        },
+                        "description": "预览CSV文件的前N行内容"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "下载CSV文件",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/1/download",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                "1",
+                                "download"
+                            ]
+                        },
+                        "description": "下载指定ID的CSV文件"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "删除数据文件",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/datafiles/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "datafiles",
+                                "1"
+                            ]
+                        },
+                        "description": "删除指定ID的数据文件"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "机器学习模型管理",
+            "item": [
+                {
+                    "name": "上传模型文件",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "file",
+                                    "type": "file",
+                                    "src": [],
+                                    "description": "模型文件"
+                                },
+                                {
+                                    "key": "model_name",
+                                    "value": "测试模型",
+                                    "type": "text",
+                                    "description": "模型名称"
+                                },
+                                {
+                                    "key": "data_count",
+                                    "value": "1000",
+                                    "type": "text",
+                                    "description": "训练数据量（必填，整数）"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "基于1000条数据训练的测试模型",
+                                    "type": "text",
+                                    "description": "模型描述（可选）"
+                                },
+                                {
+                                    "key": "model_type",
+                                    "value": "sklearn",
+                                    "type": "text",
+                                    "description": "模型类型（可选，如sklearn, pytorch等）"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/models/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                ""
+                            ]
+                        },
+                        "description": "上传机器学习模型文件到系统"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取所有模型列表",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/models/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                ""
+                            ]
+                        },
+                        "description": "获取所有已上传的模型列表"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取指定模型信息",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/models/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                "1"
+                            ]
+                        },
+                        "description": "获取指定ID的模型详细信息"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "下载模型文件",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/models/1/download",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                "1",
+                                "download"
+                            ]
+                        },
+                        "description": "下载指定ID的模型文件"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "更新模型信息",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"model_name\": \"更新后的模型名称\",\n    \"data_count\": 2000,\n    \"description\": \"更新后的描述\",\n    \"model_type\": \"sklearn\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/models/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                "1"
+                            ]
+                        },
+                        "description": "更新模型的元信息（不包括模型文件本身）"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "删除模型",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/models/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "models",
+                                "1"
+                            ]
+                        },
+                        "description": "删除指定ID的模型"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "客户端管理",
+            "item": [
+                {
+                    "name": "创建客户端",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"测试客户端\",\n    \"description\": \"用于测试的客户端\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                ""
+                            ]
+                        },
+                        "description": "创建新的客户端"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取所有客户端列表",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                ""
+                            ]
+                        },
+                        "description": "获取所有客户端列表及其关联的数据文件和模型信息"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取指定客户端信息",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1"
+                            ]
+                        },
+                        "description": "获取指定ID的客户端详细信息"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "删除客户端",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1"
+                            ]
+                        },
+                        "description": "删除指定ID的客户端"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "绑定数据文件",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"datafile_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1/bind-datafile",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1",
+                                "bind-datafile"
+                            ]
+                        },
+                        "description": "将数据文件绑定到客户端"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "解绑数据文件",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1/unbind-datafile",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1",
+                                "unbind-datafile"
+                            ]
+                        },
+                        "description": "解除客户端与数据文件的绑定"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "绑定模型",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"model_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1/bind-model",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1",
+                                "bind-model"
+                            ]
+                        },
+                        "description": "将模型绑定到客户端"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "解绑模型",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1/unbind-model",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1",
+                                "unbind-model"
+                            ]
+                        },
+                        "description": "解除客户端与模型的绑定"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "训练客户端",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"model_name\": \"client_1_trained_model\",\n    \"model_type\": \"lightgbm\",\n    \"description\": \"使用客户端绑定的数据训练的模型\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/1/train",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "1",
+                                "train"
+                            ]
+                        },
+                        "description": "使用客户端绑定的数据文件训练LightGBM模型，训练完成后自动保存并绑定模型"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "评测接口",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"client_ids\": [1, 2],\n    \"house_data\": {\n        \"城市\": \"大连\",\n        \"区域\": \"高新园区\",\n        \"街道\": \"凌水\",\n        \"小区\": \"大有恬园公寓\",\n        \"建筑面积\": 35.72,\n        \"建筑类型\": \"塔楼\",\n        \"房屋朝向\": \"南\",\n        \"装修情况\": \"精装\",\n        \"建筑结构\": \"钢混结构\",\n        \"供暖方式\": \"集中供暖\",\n        \"梯户比例\": \"四梯三十四户\",\n        \"配备电梯\": \"有\",\n        \"所在楼层\": \"高楼层 (共4层)\",\n        \"成交时间\": \"2021.01.01 成交\",\n        \"挂牌时间\": \"2020-04-20\",\n        \"百度经纬\": \"121.518155,38.884228\"\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/clients/evaluate",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "clients",
+                                "evaluate"
+                            ]
+                        },
+                        "description": "使用多个客户端的模型对房屋数据进行预测评测"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "LLM Agent 智能对话",
+            "item": [
+                {
+                    "name": "对话接口（普通模式）",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"你好，我想预测一个房子的价格\",\n    \"session_id\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/chat",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "chat"
+                            ]
+                        },
+                        "description": "与Agent进行对话，支持自动工具调用。首次请求不传session_id，后续请求传入返回的session_id以保持会话上下文。"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "对话接口（流式模式）",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"现在几点了？\",\n    \"session_id\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/chat-stream",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "chat-stream"
+                            ]
+                        },
+                        "description": "流式对话接口，返回Server-Sent Events (SSE)流。适合需要实时展示响应的场景。"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "房价预测（完整示例）",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"帮我预测一下这个房子的价格，使用模型1。房屋信息如下：\\n小区：星海湾花园\\n建筑面积：95.5平\\n房屋户型：2室2厅1厨1卫\\n所在楼层：高楼层（共25层）\\n建成年代：2018\\n装修情况：精装\\n房屋朝向：南北\\n建筑类型：塔楼\\n区域：沙河口区\\n街道：星海广场\\n城市：大连\",\n    \"session_id\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/chat",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "chat"
+                            ]
+                        },
+                        "description": "通过自然语言对话方式预测房价，Agent会自动调用predict_house_price工具"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "直接预测房价",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"house_info\": {\n        \"小区\": \"星海湾花园\",\n        \"成交时间\": \"2023.06.15 成交\",\n        \"成交价格\": 150,\n        \"元/平\": 15700,\n        \"挂牌价格（万）\": 155,\n        \"成交周期（天）\": 45,\n        \"调价（次）\": 2,\n        \"带看（次）\": 12,\n        \"关注（人）\": 89,\n        \"浏览（次）\": 1250,\n        \"房屋户型\": \"2室2厅1厨1卫\",\n        \"所在楼层\": \"高楼层（共25层）\",\n        \"建筑面积\": \"95.5㎡\",\n        \"户型结构\": \"平层\",\n        \"套内面积\": \"82.3㎡\",\n        \"建筑类型\": \"塔楼\",\n        \"房屋朝向\": \"南北\",\n        \"建成年代\": 2018,\n        \"装修情况\": \"精装\",\n        \"建筑结构\": \"钢混结构\",\n        \"供暖方式\": \"集中供暖\",\n        \"梯户比例\": \"两梯四户\",\n        \"配备电梯\": \"有\",\n        \"交易权属\": \"商品房\",\n        \"挂牌时间\": \"2023-05-01\",\n        \"房屋用途\": \"普通住宅\",\n        \"房屋年限\": \"满二年\",\n        \"房权所属\": \"非共有\",\n        \"百度经纬\": \"121.618155,38.904228\",\n        \"区域\": \"沙河口区\",\n        \"街道\": \"星海广场\",\n        \"城市\": \"大连\"\n    },\n    \"model_ids\": [1]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/predict",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "predict"
+                            ]
+                        },
+                        "description": "直接调用房价预测工具，不经过对话流程。适合已知所有参数的场景。"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取会话历史",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/sessions/:session_id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "sessions",
+                                ":session_id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "session_id",
+                                    "value": "your-session-id-here",
+                                    "description": "会话ID"
+                                }
+                            ]
+                        },
+                        "description": "获取指定会话的历史消息"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "获取所有会话列表",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/sessions",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "sessions"
+                            ]
+                        },
+                        "description": "获取所有会话的列表"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "删除会话",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/sessions/:session_id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "sessions",
+                                ":session_id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "session_id",
+                                    "value": "your-session-id-here",
+                                    "description": "会话ID"
+                                }
+                            ]
+                        },
+                        "description": "删除指定的会话"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Agent服务健康检查",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/agent/health",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "agent",
+                                "health"
+                            ]
+                        },
+                        "description": "检查Agent服务状态和活跃会话数"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:5000",
+            "type": "string"
+        }
+    ]
+}
